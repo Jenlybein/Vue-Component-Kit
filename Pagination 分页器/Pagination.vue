@@ -1,23 +1,22 @@
-
-
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 // 双向绑定
 const currentPage = defineModel<number>("currentPage", { required: true, default: 1 }); // 当前所在页
 const totalPages = defineModel<number>("totalPages", { required: true, default: 1 }); // 总页数
+const buttonCount = defineModel<number>("buttonCount", { required: true, default: 1 }); // 最多显示的页数
 
-// 最多显示的页数(保证为奇数，便于将当前页按钮置于中间)
-const maxVisiblePages = 10 | 1;
+// 保证为奇数，便于将当前页按钮置于中间
+const maxVisiblePages = computed(() => { return buttonCount.value | 1 })
 
 // 计算分页按钮显示的页码范围
 const pageNumbers = computed<number[]>(() => {
-  let halfVisiblePages = (maxVisiblePages - 1) / 2
+  let halfVisiblePages = (maxVisiblePages.value - 1) / 2
   // 确保总页数不越界
   let startPage = Math.max(currentPage.value - halfVisiblePages, 1);
-  let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages.value);
-  if (endPage - startPage < maxVisiblePages - 1) {
-    startPage = Math.max(endPage - maxVisiblePages + 1, 1);
+  let endPage = Math.min(startPage + maxVisiblePages.value - 1, totalPages.value);
+  if (endPage - startPage < maxVisiblePages.value - 1) {
+    startPage = Math.max(endPage - maxVisiblePages.value + 1, 1);
   }
 
   // 生成页码数组
