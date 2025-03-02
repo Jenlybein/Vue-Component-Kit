@@ -6,7 +6,7 @@
 
 ![image-20250302130250380](./assets/image-20250302130250380.png)
 
-**预览地址**：[Vite App (jenlybein.github.io)](https://jenlybein.github.io/Vue-Component-Kit/Pagination/dist/)
+**预览地址**：[Vite App (jenlybein.github.io)](https://jenlybein.github.io/Vue-Component-Kit/Pagination 分页器/dist/)
 
 **组件内容**：
 
